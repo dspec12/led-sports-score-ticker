@@ -3,7 +3,13 @@ from pprint import pprint
 
 
 def main():
-    get_mlb_scores()
+    parse_scores("mlb")
+    print()
+    parse_scores("nba")
+    print()
+    parse_scores("nfl")
+    print()
+    parse_scores("nhl")
 
 
 def get_json_for_sport(sport):
@@ -26,9 +32,9 @@ def get_json_for_sport(sport):
         print("An error has occurred.")
 
 
-def get_mlb_scores():
+def parse_scores(sport):
 
-    data = get_json_for_sport("mlb")
+    data = get_json_for_sport(sport)
     games = []
 
     for event in data.get("events"):
