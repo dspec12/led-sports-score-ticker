@@ -1,15 +1,39 @@
 import requests
-from pprint import pprint
 
 
 def main():
-    parse_scores("mlb")
-    print()
-    parse_scores("nba")
-    print()
-    parse_scores("nfl")
-    print()
-    parse_scores("nhl")
+
+    all_scores = compile_list_all_scores()
+    mlb = "MLB: "
+    nba = "NBA: "
+    nfl = "NFL: "
+    nhl = "NHL: "
+
+    for game in all_scores["mlb"]:
+        away = game["away"]
+        home = game["home"]
+        status = game["status"]
+        mlb = mlb + f"{away} at {home} {status}" + " "
+
+    for game in all_scores["nba"]:
+        away = game["away"]
+        home = game["home"]
+        status = game["status"]
+        nba = nba + f"{away} at {home} {status}" + " "
+
+    for game in all_scores["nfl"]:
+        away = game["away"]
+        home = game["home"]
+        status = game["status"]
+        nfl = nfl + f"{away} at {home} {status}" + " "
+
+    for game in all_scores["nhl"]:
+        away = game["away"]
+        home = game["home"]
+        status = game["status"]
+        nhl = nhl + f"{away} at {home} {status}" + " "
+
+    print(mlb, nba, nfl, nhl)
 
 
 def get_json_for_sport(sport):
@@ -53,7 +77,20 @@ def parse_scores(sport):
 
         games.append(game)
 
-    pprint(games)
+    return games
+
+
+def compile_list_all_scores():
+
+    mlb = parse_scores("mlb")
+    nba = parse_scores("nba")
+    nfl = parse_scores("nfl")
+    nhl = parse_scores("nhl")
+
+    leagues = {}
+    leagues.update({"mlb": mlb, "nba": nba, "nfl": nfl, "nhl": nhl})
+
+    return leagues
 
 
 if __name__ == "__main__":
