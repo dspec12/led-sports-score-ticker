@@ -1,3 +1,4 @@
+import os
 import requests
 import boto3
 
@@ -97,7 +98,7 @@ def compile_list_all_scores():
 def write_to_s3(string):
 
     client = boto3.client("s3")
-    bucket = "led-sports-score-ticker"
+    bucket = os.getenv("S3_BUCKET")
 
     response = client.put_object(
         ACL="public-read", Bucket=bucket, Body=string, Key="scores.txt"
