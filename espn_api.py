@@ -1,4 +1,5 @@
 import requests
+import boto3
 
 
 def main():
@@ -33,7 +34,7 @@ def main():
         status = game["status"]
         nhl = nhl + f"{away} at {home} {status}" + " "
 
-    print(mlb, nba, nfl, nhl)
+    write_to_s3(mlb + nba + nfl + nhl)
 
 
 def get_json_for_sport(sport):
@@ -91,6 +92,16 @@ def compile_list_all_scores():
     leagues.update({"mlb": mlb, "nba": nba, "nfl": nfl, "nhl": nhl})
 
     return leagues
+
+
+def write_to_s3(string):
+
+    client = boto3.client("s3")
+    bucket = "led-sports-score-ticker"
+
+    response = client.put_object(
+        ACL="public-read", Bucket=bucket, Body=string, Key="scores"
+    )
 
 
 if __name__ == "__main__":
