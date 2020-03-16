@@ -100,7 +100,7 @@ def write_to_s3(string):
     bucket = "led-sports-score-ticker"
 
     response = client.put_object(
-        ACL="public-read", Bucket=bucket, Body=string, Key="scores"
+        ACL="public-read", Bucket=bucket, Body=string, Key="scores.txt"
     )
 
 
