@@ -3,8 +3,11 @@ import requests
 import boto3
 
 
-def main():
+# Config
+s3_bucket = os.getenv("S3_BUCKET")
 
+
+def main():
     all_scores = compile_list_all_scores()
     mlb = "MLB: "
     nba = "NBA: "
@@ -39,7 +42,6 @@ def main():
 
 
 def get_json_for_sport(sport):
-
     if sport == "mlb":
         url = "http://site.api.espn.com/apis/site/v2/sports/baseball/mlb/scoreboard"
     elif sport == "nba":
@@ -59,31 +61,28 @@ def get_json_for_sport(sport):
 
 
 def parse_scores(sport):
-
     data = get_json_for_sport(sport)
     games = []
 
     for event in data.get("events"):
-
         game = {}
         game_status = event["status"]["type"]["shortDetail"]
         game.update({"status": game_status})
 
         for competition in event["competitions"]:
             for competitors in competition["competitors"]:
-
                 homeaway = competitors["homeAway"]
                 team = competitors["team"]["abbreviation"]
                 score = competitors["score"]
-                game.update({homeaway: team + " " + score},)
-
+                game.update(
+                    {homeaway: team + " " + score},
+                )
         games.append(game)
 
     return games
 
 
 def compile_list_all_scores():
-
     mlb = parse_scores("mlb")
     nba = parse_scores("nba")
     nfl = parse_scores("nfl")
@@ -96,10 +95,8 @@ def compile_list_all_scores():
 
 
 def write_to_s3(string):
-
     client = boto3.client("s3")
-    bucket = os.getenv("S3_BUCKET")
-
+    bucket = s3_bucket
     response = client.put_object(
         ACL="public-read", Bucket=bucket, Body=string, Key="scores.txt"
     )
@@ -107,4 +104,3 @@ def write_to_s3(string):
 
 if __name__ == "__main__":
     main()
-
