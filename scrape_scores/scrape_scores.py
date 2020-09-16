@@ -56,13 +56,13 @@ def get_json_for_sport(sport):
         return response.json()
 
     except requests.exceptions.ConnectionError as e:
-        print(f"Could not connect to endpoint:")
+        print("Could not connect to endpoint:")
         print(e)
     except requests.exceptions.HTTPError as e:
-        print(f"Http error:")
+        print("Http error:")
         print(e)
     except Exception as e:
-        print(f"Unknown error:")
+        print("Unknown error:")
         print(type(e))
         print(e)
 
