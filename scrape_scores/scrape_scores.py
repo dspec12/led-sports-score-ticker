@@ -53,8 +53,8 @@ def get_json_for_sport(sport):
 
     try:
         response = requests.get(url)
-        if response:
-            return response.json()
+        return response.json()
+
     except requests.exceptions.ConnectionError as e:
         print(f"Could not connect to endpoint:")
         print(e)
