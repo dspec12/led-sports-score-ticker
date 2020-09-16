@@ -50,14 +50,21 @@ def get_json_for_sport(sport):
         url = "http://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard"
     elif sport == "nhl":
         url = "http://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard"
-    else:
-        print("An error has occurred.")
 
-    response = requests.get(url)
-    if response:
-        return response.json()
-    else:
-        print("An error has occurred.")
+    try:
+        response = requests.get(url)
+        if response:
+            return response.json()
+    except requests.exceptions.ConnectionError as e:
+        print(f"Could not connect to endpoint:")
+        print(e)
+    except requests.exceptions.HTTPError as e:
+        print(f"Http error:")
+        print(e)
+    except Exception as e:
+        print(f"Unknown error:")
+        print(type(e))
+        print(e)
 
 
 def parse_scores(sport):
