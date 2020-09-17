@@ -8,15 +8,15 @@ from rgbmatrix import RGBMatrix, RGBMatrixOptions, graphics
 # Configuration for the matrix
 options = RGBMatrixOptions()
 options.scan_mode = 0
-options.pwm_lsb_nanoseconds = 300
-options.pwm_bits = 5
+options.pwm_lsb_nanoseconds = 130
+options.pwm_bits = 11
 options.show_refresh_rate = 0
+options.gpio_slowdown = 2
 options.rows = 16
 options.chain_length = 2
 options.parallel = 1
-options.hardware_mapping = "adafruit-hat"
-text_color = 4, 106, 56
-ticker_speed = 0.04
+options.hardware_mapping = "adafruit-hat-pwm"
+ticker_speed = 0.03
 
 
 def grab_scores():
