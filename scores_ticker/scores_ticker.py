@@ -16,6 +16,8 @@ options.rows = 16
 options.chain_length = 2
 options.parallel = 1
 options.hardware_mapping = "adafruit-hat-pwm"
+font_filename = "9x15B.bdf"
+text_color = 4, 106, 56
 ticker_speed = 0.03
 
 
@@ -29,9 +31,11 @@ def grab_scores():
 def led_scroll_text():
     matrix = RGBMatrix(options=options)
     offscreen_canvas = matrix.CreateFrameCanvas()
+    cwd = os.path.dirname(__file__)
+    font_path = os.path.join(cwd, font_filename)
     font = graphics.Font()
-    font.LoadFont("9x15B.bdf")
-    textColor = graphics.Color(text_color)
+    font.LoadFont(font_path)
+    textColor = graphics.Color(text_color[0], text_color[1], text_color[2])
     pos = offscreen_canvas.width
     scroll_text = grab_scores()
     count = 0
