@@ -75,13 +75,13 @@ func parseJSON(bs []byte) teamData {
 }
 
 // Routes
-func handleRequests() {
+func handleRequests(p string) {
 	http.HandleFunc("/eagles", eagles)
 	http.HandleFunc("/flyers", flyers)
 	http.HandleFunc("/phillies", phillies)
 	http.HandleFunc("/psu", psu)
 	http.HandleFunc("/sixers", sixers)
-	log.Fatal(http.ListenAndServe(":8081", nil))
+	log.Fatal(http.ListenAndServe(p, nil))
 }
 
 // Http Endpoints

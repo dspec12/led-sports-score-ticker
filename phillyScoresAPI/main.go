@@ -1,5 +1,15 @@
 package main
 
+import (
+	"log"
+	"os"
+)
+
 func main() {
-	handleRequests()
+	port := ":" + os.Getenv("PORT")
+	if port == "" {
+		log.Fatal("$PORT must be set")
+	}
+
+	handleRequests(port)
 }
