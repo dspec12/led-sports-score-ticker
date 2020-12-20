@@ -26,6 +26,7 @@ type teamData struct {
 					Team struct {
 						DisplayName      string `json:"displayName"`
 						ShortDisplayName string `json:"shortDisplayName"`
+						Abbreviation     string `json:"abbreviation"`
 						Nickname         string `json:"nickname"`
 					}
 					Score struct {
