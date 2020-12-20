@@ -2,9 +2,10 @@
 Description=Led Sports Scores Ticker
 Requires=network-online.target
 After=network-online.target
+Conflicts=philly-ticker.service
 
 [Service]
-ExecStart=/usr/bin/python3 /opt/led-sports-score-ticker/scores_ticker/scores_ticker.py
+ExecStart=/usr/bin/python3 /home/pi/led-sports-score-ticker/ticker/scores_ticker.py
 Environment=PYTHONUNBUFFERED=1
 Restart=on-failure
 Type=simple
