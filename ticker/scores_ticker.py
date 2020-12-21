@@ -2,6 +2,7 @@
 import sys
 import os
 import time
+import requests
 from rgbmatrix import RGBMatrix, RGBMatrixOptions, graphics
 
 
@@ -22,10 +23,20 @@ ticker_speed = 0.03
 
 
 def grab_scores():
-    scores = os.popen(
-        "curl https://led-sports-score-ticker.s3.amazonaws.com/scores.txt"
-    ).read()
-    return scores
+    url = "https://led-sports-score-ticker.s3.amazonaws.com/scores.txt"
+    try:
+        scores = requests.get(url)
+        return scores.text
+    except requests.exceptions.ConnectionError as e:
+        print("Could not connect to endpoint:")
+        print(e)
+    except requests.exceptions.HTTPError as e:
+        print("Http error:")
+        print(e)
+    except Exception as e:
+        print("Unknown error:")
+        print(type(e))
+        print(e)
 
 
 def led_scroll_text():
