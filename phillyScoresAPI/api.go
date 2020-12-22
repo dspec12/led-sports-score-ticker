@@ -21,6 +21,7 @@ type teamData struct {
 		}
 		NextEvent []struct {
 			Name         string `json:"name"`
+			ShortName    string `json:"shortName"`
 			Competitions []struct {
 				Competitors []struct {
 					Team struct {
@@ -90,13 +91,13 @@ func eagles(w http.ResponseWriter, r *http.Request) {
 	t := getESPNJSON(eaglesURL)
 	ts := parseJSON(t)
 
-	teamName := ts.Team.DisplayName
+	teamName := ts.Team.Name
 	teamRecord := ts.Team.Record.Items[0].Summary
-	nextGame := ts.Team.NextEvent[0].Name
+	nextGame := ts.Team.NextEvent[0].ShortName
 	gameDetail := ts.Team.NextEvent[0].Competitions[0].Status.Type.Detail
-	homeTeam := ts.Team.NextEvent[0].Competitions[0].Competitors[0].Team.Nickname
+	homeTeam := ts.Team.NextEvent[0].Competitions[0].Competitors[0].Team.Abbreviation
 	homeScore := ts.Team.NextEvent[0].Competitions[0].Competitors[0].Score.DisplayValue
-	awayTeam := ts.Team.NextEvent[0].Competitions[0].Competitors[1].Team.Nickname
+	awayTeam := ts.Team.NextEvent[0].Competitions[0].Competitors[1].Team.Abbreviation
 	awayScore := ts.Team.NextEvent[0].Competitions[0].Competitors[1].Score.DisplayValue
 	teamStandings := strings.TrimSuffix(ts.Team.StandingSummary, " - East")
 
@@ -115,13 +116,13 @@ func flyers(w http.ResponseWriter, r *http.Request) {
 	t := getESPNJSON(flyersURL)
 	ts := parseJSON(t)
 
-	teamName := ts.Team.DisplayName
+	teamName := ts.Team.Name
 	teamRecord := ts.Team.Record.Items[0].Summary
-	nextGame := ts.Team.NextEvent[0].Name
+	nextGame := ts.Team.NextEvent[0].ShortName
 	gameDetail := ts.Team.NextEvent[0].Competitions[0].Status.Type.Detail
-	homeTeam := ts.Team.NextEvent[0].Competitions[0].Competitors[0].Team.Nickname
+	homeTeam := ts.Team.NextEvent[0].Competitions[0].Competitors[0].Team.Abbreviation
 	homeScore := ts.Team.NextEvent[0].Competitions[0].Competitors[0].Score.DisplayValue
-	awayTeam := ts.Team.NextEvent[0].Competitions[0].Competitors[1].Team.Nickname
+	awayTeam := ts.Team.NextEvent[0].Competitions[0].Competitors[1].Team.Abbreviation
 	awayScore := ts.Team.NextEvent[0].Competitions[0].Competitors[1].Score.DisplayValue
 	teamStandings := strings.TrimSuffix(ts.Team.StandingSummary, " - East")
 
@@ -140,13 +141,13 @@ func phillies(w http.ResponseWriter, r *http.Request) {
 	t := getESPNJSON(philliesURL)
 	ts := parseJSON(t)
 
-	teamName := ts.Team.DisplayName
+	teamName := ts.Team.Name
 	teamRecord := ts.Team.Record.Items[0].Summary
-	nextGame := ts.Team.NextEvent[0].Name
+	nextGame := ts.Team.NextEvent[0].ShortName
 	gameDetail := ts.Team.NextEvent[0].Competitions[0].Status.Type.Detail
-	homeTeam := ts.Team.NextEvent[0].Competitions[0].Competitors[0].Team.Nickname
+	homeTeam := ts.Team.NextEvent[0].Competitions[0].Competitors[0].Team.Abbreviation
 	homeScore := ts.Team.NextEvent[0].Competitions[0].Competitors[0].Score.DisplayValue
-	awayTeam := ts.Team.NextEvent[0].Competitions[0].Competitors[1].Team.Nickname
+	awayTeam := ts.Team.NextEvent[0].Competitions[0].Competitors[1].Team.Abbreviation
 	awayScore := ts.Team.NextEvent[0].Competitions[0].Competitors[1].Score.DisplayValue
 	teamStandings := strings.TrimSuffix(ts.Team.StandingSummary, " - East")
 
@@ -165,13 +166,13 @@ func psu(w http.ResponseWriter, r *http.Request) {
 	t := getESPNJSON(psuURL)
 	ts := parseJSON(t)
 
-	teamName := ts.Team.DisplayName
+	teamName := ts.Team.Name
 	teamRecord := ts.Team.Record.Items[0].Summary
-	nextGame := ts.Team.NextEvent[0].Name
+	nextGame := ts.Team.NextEvent[0].ShortName
 	gameDetail := ts.Team.NextEvent[0].Competitions[0].Status.Type.Detail
-	homeTeam := ts.Team.NextEvent[0].Competitions[0].Competitors[0].Team.Nickname
+	homeTeam := ts.Team.NextEvent[0].Competitions[0].Competitors[0].Team.Abbreviation
 	homeScore := ts.Team.NextEvent[0].Competitions[0].Competitors[0].Score.DisplayValue
-	awayTeam := ts.Team.NextEvent[0].Competitions[0].Competitors[1].Team.Nickname
+	awayTeam := ts.Team.NextEvent[0].Competitions[0].Competitors[1].Team.Abbreviation
 	awayScore := ts.Team.NextEvent[0].Competitions[0].Competitors[1].Score.DisplayValue
 	teamStandings := strings.TrimSuffix(ts.Team.StandingSummary, " - East")
 
@@ -190,13 +191,13 @@ func sixers(w http.ResponseWriter, r *http.Request) {
 	t := getESPNJSON(sixersURL)
 	ts := parseJSON(t)
 
-	teamName := ts.Team.DisplayName
+	teamName := ts.Team.Name
 	teamRecord := ts.Team.Record.Items[0].Summary
-	nextGame := ts.Team.NextEvent[0].Name
+	nextGame := ts.Team.NextEvent[0].ShortName
 	gameDetail := ts.Team.NextEvent[0].Competitions[0].Status.Type.Detail
-	homeTeam := ts.Team.NextEvent[0].Competitions[0].Competitors[0].Team.Nickname
+	homeTeam := ts.Team.NextEvent[0].Competitions[0].Competitors[0].Team.Abbreviation
 	homeScore := ts.Team.NextEvent[0].Competitions[0].Competitors[0].Score.DisplayValue
-	awayTeam := ts.Team.NextEvent[0].Competitions[0].Competitors[1].Team.Nickname
+	awayTeam := ts.Team.NextEvent[0].Competitions[0].Competitors[1].Team.Abbreviation
 	awayScore := ts.Team.NextEvent[0].Competitions[0].Competitors[1].Score.DisplayValue
 	teamStandings := strings.TrimSuffix(ts.Team.StandingSummary, " - East")
 
