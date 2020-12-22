@@ -27,7 +27,7 @@ def grab_team_info(team):
 
     try:
         team_info = requests.get(team_info)
-        return team_info.text
+        return team_info.text[:-1]
     
     except requests.exceptions.ConnectionError as e:
         print("Could not connect to endpoint:")
