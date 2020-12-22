@@ -6,4 +6,4 @@ Project consists of three parts:
 
 * Philly Scores API - API app that consumes ESPN APIs and returns formatted strings for major philly sports teams. 
 
-* Scores Ticker - This script runs on a Raspberry Pi. It grabs a string from a http endpoint and writes to LED panels using [Henner Zeller RPi RGB LED Matrix.](https://github.com/hzeller/rpi-rgb-led-matrix/)
+* Ticker - This folder contains different tickers (python scripts) that run on a Raspberry Pi. It grabs strings from a http endpoint and writes to LED panels using [Henner Zeller RPi RGB LED Matrix.](https://github.com/hzeller/rpi-rgb-led-matrix/)
