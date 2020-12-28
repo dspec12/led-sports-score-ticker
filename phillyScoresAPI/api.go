@@ -108,9 +108,9 @@ func eagles(w http.ResponseWriter, r *http.Request) {
 		case "pre":
 			fmt.Fprintln(w, teamName, "("+teamRecord+")"+":", teamStandings, "-", "Next Game:", nextGame, "-", gameDetail)
 		case "post":
-			fmt.Fprintln(w, teamName, "("+teamRecord+")"+":", teamStandings, "-", "Last Game:", awayTeam, awayScore, "at", homeTeam, homeScore, "-", gameDetail)
+			fmt.Fprintln(w, teamName, "("+teamRecord+")"+":", teamStandings, "-", "Last Game:", awayTeam, awayScore, "@", homeTeam, homeScore, "-", gameDetail)
 		case "in":
-			fmt.Fprintln(w, teamName, "("+teamRecord+")"+":", teamStandings, "-", "Live:", awayTeam, awayScore, "at", homeTeam, homeScore, "-", gameDetail)
+			fmt.Fprintln(w, teamName, "("+teamRecord+")"+":", teamStandings, "-", "Live:", awayTeam, awayScore, "@", homeTeam, homeScore, "-", gameDetail)
 		}
 	}
 }
@@ -137,9 +137,9 @@ func flyers(w http.ResponseWriter, r *http.Request) {
 		case "pre":
 			fmt.Fprintln(w, teamName, "("+teamRecord+")"+":", teamStandings, "-", "Next Game:", nextGame, "-", gameDetail)
 		case "post":
-			fmt.Fprintln(w, teamName, "("+teamRecord+")"+":", teamStandings, "-", "Last Game:", awayTeam, awayScore, "at", homeTeam, homeScore, "-", gameDetail)
+			fmt.Fprintln(w, teamName, "("+teamRecord+")"+":", teamStandings, "-", "Last Game:", awayTeam, awayScore, "@", homeTeam, homeScore, "-", gameDetail)
 		case "in":
-			fmt.Fprintln(w, teamName, "("+teamRecord+")"+":", teamStandings, "-", "Live:", awayTeam, awayScore, "at", homeTeam, homeScore, "-", gameDetail)
+			fmt.Fprintln(w, teamName, "("+teamRecord+")"+":", teamStandings, "-", "Live:", awayTeam, awayScore, "@", homeTeam, homeScore, "-", gameDetail)
 		}
 	}
 }
@@ -166,9 +166,9 @@ func phillies(w http.ResponseWriter, r *http.Request) {
 		case "pre":
 			fmt.Fprintln(w, teamName, "("+teamRecord+")"+":", teamStandings, "-", "Next Game:", nextGame, "-", gameDetail)
 		case "post":
-			fmt.Fprintln(w, teamName, "("+teamRecord+")"+":", teamStandings, "-", "Last Game:", awayTeam, awayScore, "at", homeTeam, homeScore, "-", gameDetail)
+			fmt.Fprintln(w, teamName, "("+teamRecord+")"+":", teamStandings, "-", "Last Game:", awayTeam, awayScore, "@", homeTeam, homeScore, "-", gameDetail)
 		case "in":
-			fmt.Fprintln(w, teamName, "("+teamRecord+")"+":", teamStandings, "-", "Live:", awayTeam, awayScore, "at", homeTeam, homeScore, "-", gameDetail)
+			fmt.Fprintln(w, teamName, "("+teamRecord+")"+":", teamStandings, "-", "Live:", awayTeam, awayScore, "@", homeTeam, homeScore, "-", gameDetail)
 		}
 	}
 }
@@ -195,9 +195,9 @@ func psu(w http.ResponseWriter, r *http.Request) {
 		case "pre":
 			fmt.Fprintln(w, teamName, "("+teamRecord+")"+":", teamStandings, "-", "Next Game:", nextGame, "-", gameDetail)
 		case "post":
-			fmt.Fprintln(w, teamName, "("+teamRecord+")"+":", teamStandings, "-", "Last Game:", awayTeam, awayScore, "at", homeTeam, homeScore, "-", gameDetail)
+			fmt.Fprintln(w, teamName, "("+teamRecord+")"+":", teamStandings, "-", "Last Game:", awayTeam, awayScore, "@", homeTeam, homeScore, "-", gameDetail)
 		case "in":
-			fmt.Fprintln(w, teamName, "("+teamRecord+")"+":", teamStandings, "-", "Live:", awayTeam, awayScore, "at", homeTeam, homeScore, "-", gameDetail)
+			fmt.Fprintln(w, teamName, "("+teamRecord+")"+":", teamStandings, "-", "Live:", awayTeam, awayScore, "@", homeTeam, homeScore, "-", gameDetail)
 		}
 	}
 }
@@ -224,9 +224,9 @@ func sixers(w http.ResponseWriter, r *http.Request) {
 		case "pre":
 			fmt.Fprintln(w, teamName, "("+teamRecord+")"+":", teamStandings, "-", "Next Game:", nextGame, "-", gameDetail)
 		case "post":
-			fmt.Fprintln(w, teamName, "("+teamRecord+")"+":", teamStandings, "-", "Last Game:", awayTeam, awayScore, "at", homeTeam, homeScore, "-", gameDetail)
+			fmt.Fprintln(w, teamName, "("+teamRecord+")"+":", teamStandings, "-", "Last Game:", awayTeam, awayScore, "@", homeTeam, homeScore, "-", gameDetail)
 		case "in":
-			fmt.Fprintln(w, teamName, "("+teamRecord+")"+":", teamStandings, "-", "Live:", awayTeam, awayScore, "at", homeTeam, homeScore, "-", gameDetail)
+			fmt.Fprintln(w, teamName, "("+teamRecord+")"+":", teamStandings, "-", "Live:", awayTeam, awayScore, "@", homeTeam, homeScore, "-", gameDetail)
 		}
 	}
 }
