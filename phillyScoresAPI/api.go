@@ -90,24 +90,28 @@ func eagles(w http.ResponseWriter, r *http.Request) {
 	log.Println("Endpoint Hit: eagles")
 	t := getESPNJSON(eaglesURL)
 	ts := parseJSON(t)
-
 	teamName := ts.Team.Name
-	teamRecord := ts.Team.Record.Items[0].Summary
-	nextGame := ts.Team.NextEvent[0].ShortName
-	gameDetail := ts.Team.NextEvent[0].Competitions[0].Status.Type.Detail
-	homeTeam := ts.Team.NextEvent[0].Competitions[0].Competitors[0].Team.Abbreviation
-	homeScore := ts.Team.NextEvent[0].Competitions[0].Competitors[0].Score.DisplayValue
-	awayTeam := ts.Team.NextEvent[0].Competitions[0].Competitors[1].Team.Abbreviation
-	awayScore := ts.Team.NextEvent[0].Competitions[0].Competitors[1].Score.DisplayValue
-	teamStandings := strings.TrimSuffix(ts.Team.StandingSummary, " - East")
 
-	switch gs := ts.Team.NextEvent[0].Competitions[0].Status.Type.State; gs {
-	case "pre":
-		fmt.Fprintln(w, teamName, "("+teamRecord+")"+":", teamStandings, "-", "Next Game:", nextGame, "-", gameDetail)
-	case "post":
-		fmt.Fprintln(w, teamName, "("+teamRecord+")"+":", teamStandings, "-", "Last Game:", awayTeam, awayScore, "at", homeTeam, homeScore, "-", gameDetail)
-	case "in":
-		fmt.Fprintln(w, teamName, "("+teamRecord+")"+":", teamStandings, "-", "Live:", awayTeam, awayScore, "at", homeTeam, homeScore, "-", gameDetail)
+	if len(ts.Team.Record.Items) == 0 || len(ts.Team.NextEvent) == 0 {
+		fmt.Fprintln(w, teamName+":", "No scheduled games")
+	} else {
+		teamRecord := ts.Team.Record.Items[0].Summary
+		nextGame := ts.Team.NextEvent[0].ShortName
+		gameDetail := ts.Team.NextEvent[0].Competitions[0].Status.Type.Detail
+		homeTeam := ts.Team.NextEvent[0].Competitions[0].Competitors[0].Team.Abbreviation
+		homeScore := ts.Team.NextEvent[0].Competitions[0].Competitors[0].Score.DisplayValue
+		awayTeam := ts.Team.NextEvent[0].Competitions[0].Competitors[1].Team.Abbreviation
+		awayScore := ts.Team.NextEvent[0].Competitions[0].Competitors[1].Score.DisplayValue
+		teamStandings := strings.TrimSuffix(ts.Team.StandingSummary, " - East")
+
+		switch gs := ts.Team.NextEvent[0].Competitions[0].Status.Type.State; gs {
+		case "pre":
+			fmt.Fprintln(w, teamName, "("+teamRecord+")"+":", teamStandings, "-", "Next Game:", nextGame, "-", gameDetail)
+		case "post":
+			fmt.Fprintln(w, teamName, "("+teamRecord+")"+":", teamStandings, "-", "Last Game:", awayTeam, awayScore, "at", homeTeam, homeScore, "-", gameDetail)
+		case "in":
+			fmt.Fprintln(w, teamName, "("+teamRecord+")"+":", teamStandings, "-", "Live:", awayTeam, awayScore, "at", homeTeam, homeScore, "-", gameDetail)
+		}
 	}
 }
 
@@ -115,24 +119,28 @@ func flyers(w http.ResponseWriter, r *http.Request) {
 	log.Println("Endpoint Hit: flyers")
 	t := getESPNJSON(flyersURL)
 	ts := parseJSON(t)
-
 	teamName := ts.Team.Name
-	teamRecord := ts.Team.Record.Items[0].Summary
-	nextGame := ts.Team.NextEvent[0].ShortName
-	gameDetail := ts.Team.NextEvent[0].Competitions[0].Status.Type.Detail
-	homeTeam := ts.Team.NextEvent[0].Competitions[0].Competitors[0].Team.Abbreviation
-	homeScore := ts.Team.NextEvent[0].Competitions[0].Competitors[0].Score.DisplayValue
-	awayTeam := ts.Team.NextEvent[0].Competitions[0].Competitors[1].Team.Abbreviation
-	awayScore := ts.Team.NextEvent[0].Competitions[0].Competitors[1].Score.DisplayValue
-	teamStandings := strings.TrimSuffix(ts.Team.StandingSummary, " - East")
 
-	switch gs := ts.Team.NextEvent[0].Competitions[0].Status.Type.State; gs {
-	case "pre":
-		fmt.Fprintln(w, teamName, "("+teamRecord+")"+":", teamStandings, "-", "Next Game:", nextGame, "-", gameDetail)
-	case "post":
-		fmt.Fprintln(w, teamName, "("+teamRecord+")"+":", teamStandings, "-", "Last Game:", awayTeam, awayScore, "at", homeTeam, homeScore, "-", gameDetail)
-	case "in":
-		fmt.Fprintln(w, teamName, "("+teamRecord+")"+":", teamStandings, "-", "Live:", awayTeam, awayScore, "at", homeTeam, homeScore, "-", gameDetail)
+	if len(ts.Team.Record.Items) == 0 || len(ts.Team.NextEvent) == 0 {
+		fmt.Fprintln(w, teamName+":", "No scheduled games")
+	} else {
+		teamRecord := ts.Team.Record.Items[0].Summary
+		nextGame := ts.Team.NextEvent[0].ShortName
+		gameDetail := ts.Team.NextEvent[0].Competitions[0].Status.Type.Detail
+		homeTeam := ts.Team.NextEvent[0].Competitions[0].Competitors[0].Team.Abbreviation
+		homeScore := ts.Team.NextEvent[0].Competitions[0].Competitors[0].Score.DisplayValue
+		awayTeam := ts.Team.NextEvent[0].Competitions[0].Competitors[1].Team.Abbreviation
+		awayScore := ts.Team.NextEvent[0].Competitions[0].Competitors[1].Score.DisplayValue
+		teamStandings := strings.TrimSuffix(ts.Team.StandingSummary, " - East")
+
+		switch gs := ts.Team.NextEvent[0].Competitions[0].Status.Type.State; gs {
+		case "pre":
+			fmt.Fprintln(w, teamName, "("+teamRecord+")"+":", teamStandings, "-", "Next Game:", nextGame, "-", gameDetail)
+		case "post":
+			fmt.Fprintln(w, teamName, "("+teamRecord+")"+":", teamStandings, "-", "Last Game:", awayTeam, awayScore, "at", homeTeam, homeScore, "-", gameDetail)
+		case "in":
+			fmt.Fprintln(w, teamName, "("+teamRecord+")"+":", teamStandings, "-", "Live:", awayTeam, awayScore, "at", homeTeam, homeScore, "-", gameDetail)
+		}
 	}
 }
 
@@ -140,24 +148,28 @@ func phillies(w http.ResponseWriter, r *http.Request) {
 	log.Println("Endpoint Hit: phillies")
 	t := getESPNJSON(philliesURL)
 	ts := parseJSON(t)
-
 	teamName := ts.Team.Name
-	teamRecord := ts.Team.Record.Items[0].Summary
-	nextGame := ts.Team.NextEvent[0].ShortName
-	gameDetail := ts.Team.NextEvent[0].Competitions[0].Status.Type.Detail
-	homeTeam := ts.Team.NextEvent[0].Competitions[0].Competitors[0].Team.Abbreviation
-	homeScore := ts.Team.NextEvent[0].Competitions[0].Competitors[0].Score.DisplayValue
-	awayTeam := ts.Team.NextEvent[0].Competitions[0].Competitors[1].Team.Abbreviation
-	awayScore := ts.Team.NextEvent[0].Competitions[0].Competitors[1].Score.DisplayValue
-	teamStandings := strings.TrimSuffix(ts.Team.StandingSummary, " - East")
 
-	switch gs := ts.Team.NextEvent[0].Competitions[0].Status.Type.State; gs {
-	case "pre":
-		fmt.Fprintln(w, teamName, "("+teamRecord+")"+":", teamStandings, "-", "Next Game:", nextGame, "-", gameDetail)
-	case "post":
-		fmt.Fprintln(w, teamName, "("+teamRecord+")"+":", teamStandings, "-", "Last Game:", awayTeam, awayScore, "at", homeTeam, homeScore, "-", gameDetail)
-	case "in":
-		fmt.Fprintln(w, teamName, "("+teamRecord+")"+":", teamStandings, "-", "Live:", awayTeam, awayScore, "at", homeTeam, homeScore, "-", gameDetail)
+	if len(ts.Team.Record.Items) == 0 || len(ts.Team.NextEvent) == 0 {
+		fmt.Fprintln(w, teamName+":", "No scheduled games")
+	} else {
+		teamRecord := ts.Team.Record.Items[0].Summary
+		nextGame := ts.Team.NextEvent[0].ShortName
+		gameDetail := ts.Team.NextEvent[0].Competitions[0].Status.Type.Detail
+		homeTeam := ts.Team.NextEvent[0].Competitions[0].Competitors[0].Team.Abbreviation
+		homeScore := ts.Team.NextEvent[0].Competitions[0].Competitors[0].Score.DisplayValue
+		awayTeam := ts.Team.NextEvent[0].Competitions[0].Competitors[1].Team.Abbreviation
+		awayScore := ts.Team.NextEvent[0].Competitions[0].Competitors[1].Score.DisplayValue
+		teamStandings := strings.TrimSuffix(ts.Team.StandingSummary, " - East")
+
+		switch gs := ts.Team.NextEvent[0].Competitions[0].Status.Type.State; gs {
+		case "pre":
+			fmt.Fprintln(w, teamName, "("+teamRecord+")"+":", teamStandings, "-", "Next Game:", nextGame, "-", gameDetail)
+		case "post":
+			fmt.Fprintln(w, teamName, "("+teamRecord+")"+":", teamStandings, "-", "Last Game:", awayTeam, awayScore, "at", homeTeam, homeScore, "-", gameDetail)
+		case "in":
+			fmt.Fprintln(w, teamName, "("+teamRecord+")"+":", teamStandings, "-", "Live:", awayTeam, awayScore, "at", homeTeam, homeScore, "-", gameDetail)
+		}
 	}
 }
 
@@ -165,24 +177,28 @@ func psu(w http.ResponseWriter, r *http.Request) {
 	log.Println("Endpoint Hit: psu")
 	t := getESPNJSON(psuURL)
 	ts := parseJSON(t)
-
 	teamName := ts.Team.Name
-	teamRecord := ts.Team.Record.Items[0].Summary
-	nextGame := ts.Team.NextEvent[0].ShortName
-	gameDetail := ts.Team.NextEvent[0].Competitions[0].Status.Type.Detail
-	homeTeam := ts.Team.NextEvent[0].Competitions[0].Competitors[0].Team.Abbreviation
-	homeScore := ts.Team.NextEvent[0].Competitions[0].Competitors[0].Score.DisplayValue
-	awayTeam := ts.Team.NextEvent[0].Competitions[0].Competitors[1].Team.Abbreviation
-	awayScore := ts.Team.NextEvent[0].Competitions[0].Competitors[1].Score.DisplayValue
-	teamStandings := strings.TrimSuffix(ts.Team.StandingSummary, " - East")
 
-	switch gs := ts.Team.NextEvent[0].Competitions[0].Status.Type.State; gs {
-	case "pre":
-		fmt.Fprintln(w, teamName, "("+teamRecord+")"+":", teamStandings, "-", "Next Game:", nextGame, "-", gameDetail)
-	case "post":
-		fmt.Fprintln(w, teamName, "("+teamRecord+")"+":", teamStandings, "-", "Last Game:", awayTeam, awayScore, "at", homeTeam, homeScore, "-", gameDetail)
-	case "in":
-		fmt.Fprintln(w, teamName, "("+teamRecord+")"+":", teamStandings, "-", "Live:", awayTeam, awayScore, "at", homeTeam, homeScore, "-", gameDetail)
+	if len(ts.Team.Record.Items) == 0 || len(ts.Team.NextEvent) == 0 {
+		fmt.Fprintln(w, teamName+":", "No scheduled games")
+	} else {
+		teamRecord := ts.Team.Record.Items[0].Summary
+		nextGame := ts.Team.NextEvent[0].ShortName
+		gameDetail := ts.Team.NextEvent[0].Competitions[0].Status.Type.Detail
+		homeTeam := ts.Team.NextEvent[0].Competitions[0].Competitors[0].Team.Abbreviation
+		homeScore := ts.Team.NextEvent[0].Competitions[0].Competitors[0].Score.DisplayValue
+		awayTeam := ts.Team.NextEvent[0].Competitions[0].Competitors[1].Team.Abbreviation
+		awayScore := ts.Team.NextEvent[0].Competitions[0].Competitors[1].Score.DisplayValue
+		teamStandings := strings.TrimSuffix(ts.Team.StandingSummary, " - East")
+
+		switch gs := ts.Team.NextEvent[0].Competitions[0].Status.Type.State; gs {
+		case "pre":
+			fmt.Fprintln(w, teamName, "("+teamRecord+")"+":", teamStandings, "-", "Next Game:", nextGame, "-", gameDetail)
+		case "post":
+			fmt.Fprintln(w, teamName, "("+teamRecord+")"+":", teamStandings, "-", "Last Game:", awayTeam, awayScore, "at", homeTeam, homeScore, "-", gameDetail)
+		case "in":
+			fmt.Fprintln(w, teamName, "("+teamRecord+")"+":", teamStandings, "-", "Live:", awayTeam, awayScore, "at", homeTeam, homeScore, "-", gameDetail)
+		}
 	}
 }
 
@@ -190,23 +206,27 @@ func sixers(w http.ResponseWriter, r *http.Request) {
 	log.Println("Endpoint Hit: sixers")
 	t := getESPNJSON(sixersURL)
 	ts := parseJSON(t)
-
 	teamName := ts.Team.Name
-	teamRecord := ts.Team.Record.Items[0].Summary
-	nextGame := ts.Team.NextEvent[0].ShortName
-	gameDetail := ts.Team.NextEvent[0].Competitions[0].Status.Type.Detail
-	homeTeam := ts.Team.NextEvent[0].Competitions[0].Competitors[0].Team.Abbreviation
-	homeScore := ts.Team.NextEvent[0].Competitions[0].Competitors[0].Score.DisplayValue
-	awayTeam := ts.Team.NextEvent[0].Competitions[0].Competitors[1].Team.Abbreviation
-	awayScore := ts.Team.NextEvent[0].Competitions[0].Competitors[1].Score.DisplayValue
-	teamStandings := strings.TrimSuffix(ts.Team.StandingSummary, " - East")
 
-	switch gs := ts.Team.NextEvent[0].Competitions[0].Status.Type.State; gs {
-	case "pre":
-		fmt.Fprintln(w, teamName, "("+teamRecord+")"+":", teamStandings, "-", "Next Game:", nextGame, "-", gameDetail)
-	case "post":
-		fmt.Fprintln(w, teamName, "("+teamRecord+")"+":", teamStandings, "-", "Last Game:", awayTeam, awayScore, "at", homeTeam, homeScore, "-", gameDetail)
-	case "in":
-		fmt.Fprintln(w, teamName, "("+teamRecord+")"+":", teamStandings, "-", "Live:", awayTeam, awayScore, "at", homeTeam, homeScore, "-", gameDetail)
+	if len(ts.Team.Record.Items) == 0 || len(ts.Team.NextEvent) == 0 {
+		fmt.Fprintln(w, teamName+":", "No scheduled games")
+	} else {
+		teamRecord := ts.Team.Record.Items[0].Summary
+		nextGame := ts.Team.NextEvent[0].ShortName
+		gameDetail := ts.Team.NextEvent[0].Competitions[0].Status.Type.Detail
+		homeTeam := ts.Team.NextEvent[0].Competitions[0].Competitors[0].Team.Abbreviation
+		homeScore := ts.Team.NextEvent[0].Competitions[0].Competitors[0].Score.DisplayValue
+		awayTeam := ts.Team.NextEvent[0].Competitions[0].Competitors[1].Team.Abbreviation
+		awayScore := ts.Team.NextEvent[0].Competitions[0].Competitors[1].Score.DisplayValue
+		teamStandings := strings.TrimSuffix(ts.Team.StandingSummary, " - East")
+
+		switch gs := ts.Team.NextEvent[0].Competitions[0].Status.Type.State; gs {
+		case "pre":
+			fmt.Fprintln(w, teamName, "("+teamRecord+")"+":", teamStandings, "-", "Next Game:", nextGame, "-", gameDetail)
+		case "post":
+			fmt.Fprintln(w, teamName, "("+teamRecord+")"+":", teamStandings, "-", "Last Game:", awayTeam, awayScore, "at", homeTeam, homeScore, "-", gameDetail)
+		case "in":
+			fmt.Fprintln(w, teamName, "("+teamRecord+")"+":", teamStandings, "-", "Live:", awayTeam, awayScore, "at", homeTeam, homeScore, "-", gameDetail)
+		}
 	}
 }
