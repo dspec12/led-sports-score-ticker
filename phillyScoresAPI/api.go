@@ -1,79 +1,11 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"log"
 	"net/http"
 	"strings"
 )
-
-type teamData struct {
-	Team struct {
-		Name            string `json:"name"`
-		DisplayName     string `json:"displayName"`
-		StandingSummary string `json:"standingSummary"`
-		Record          struct {
-			Items []struct {
-				Summary string `json:"summary"`
-			}
-		}
-		NextEvent []struct {
-			Name         string `json:"name"`
-			ShortName    string `json:"shortName"`
-			Competitions []struct {
-				Competitors []struct {
-					Team struct {
-						DisplayName      string `json:"displayName"`
-						ShortDisplayName string `json:"shortDisplayName"`
-						Abbreviation     string `json:"abbreviation"`
-						Nickname         string `json:"nickname"`
-					}
-					Score struct {
-						DisplayValue string `json:"displayValue"`
-					}
-				}
-				Status struct {
-					Type struct {
-						Name        string `json:"name"`
-						State       string `json:"state"`
-						Description string `json:"description"`
-						Detail      string `json:"detail"`
-					}
-				}
-			}
-		}
-	}
-}
-
-const eaglesURL = "https://site.api.espn.com/apis/site/v2/sports/football/nfl/teams/phi"
-const flyersURL = "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/teams/phi"
-const philliesURL = "https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/teams/phi"
-const psuURL = "https://site.api.espn.com/apis/site/v2/sports/football/college-football/teams/psu"
-const sixersURL = "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/teams/phi"
-
-func getESPNJSON(url string) []byte {
-	resp, err := http.Get(url)
-	if err != nil {
-		log.Println(err)
-	}
-
-	b, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		log.Println(err)
-	}
-	return b
-}
-
-func parseJSON(bs []byte) teamData {
-	teamInfo := teamData{}
-	jsonErr := json.Unmarshal(bs, &teamInfo)
-	if jsonErr != nil {
-		log.Fatalln(jsonErr)
-	}
-	return teamInfo
-}
 
 // Routes
 func handleRequests(p string) {
@@ -88,8 +20,7 @@ func handleRequests(p string) {
 // Http Endpoints
 func eagles(w http.ResponseWriter, r *http.Request) {
 	log.Println("Endpoint Hit: eagles")
-	t := getESPNJSON(eaglesURL)
-	ts := parseJSON(t)
+	ts := getTeamData("eagles")
 	teamName := ts.Team.Name
 
 	if len(ts.Team.Record.Items) == 0 || len(ts.Team.NextEvent) == 0 {
@@ -117,8 +48,7 @@ func eagles(w http.ResponseWriter, r *http.Request) {
 
 func flyers(w http.ResponseWriter, r *http.Request) {
 	log.Println("Endpoint Hit: flyers")
-	t := getESPNJSON(flyersURL)
-	ts := parseJSON(t)
+	ts := getTeamData("flyers")
 	teamName := ts.Team.Name
 
 	if len(ts.Team.Record.Items) == 0 || len(ts.Team.NextEvent) == 0 {
@@ -146,8 +76,7 @@ func flyers(w http.ResponseWriter, r *http.Request) {
 
 func phillies(w http.ResponseWriter, r *http.Request) {
 	log.Println("Endpoint Hit: phillies")
-	t := getESPNJSON(philliesURL)
-	ts := parseJSON(t)
+	ts := getTeamData("phillies")
 	teamName := ts.Team.Name
 
 	if len(ts.Team.Record.Items) == 0 || len(ts.Team.NextEvent) == 0 {
@@ -175,8 +104,7 @@ func phillies(w http.ResponseWriter, r *http.Request) {
 
 func psu(w http.ResponseWriter, r *http.Request) {
 	log.Println("Endpoint Hit: psu")
-	t := getESPNJSON(psuURL)
-	ts := parseJSON(t)
+	ts := getTeamData("psu")
 	teamName := ts.Team.Name
 
 	if len(ts.Team.Record.Items) == 0 || len(ts.Team.NextEvent) == 0 {
@@ -204,8 +132,7 @@ func psu(w http.ResponseWriter, r *http.Request) {
 
 func sixers(w http.ResponseWriter, r *http.Request) {
 	log.Println("Endpoint Hit: sixers")
-	t := getESPNJSON(sixersURL)
-	ts := parseJSON(t)
+	ts := getTeamData("sixers")
 	teamName := ts.Team.Name
 
 	if len(ts.Team.Record.Items) == 0 || len(ts.Team.NextEvent) == 0 {

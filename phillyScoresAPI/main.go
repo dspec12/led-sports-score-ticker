@@ -11,5 +11,6 @@ func main() {
 		log.Fatal("$PORT must be set")
 	}
 
+	initCache(teams)
 	handleRequests(port)
 }
