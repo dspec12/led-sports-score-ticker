@@ -1,6 +1,6 @@
 # LED-Sports-Score-Ticker
 
-Project consists of the tickers that runs on a Raspi. These tickers consume text from either the Philly Scores API or the Scores Scraper script.
+Project consists of the tickers that run on a Raspi. These tickers consume text from either the Philly Scores API or the Scores Scraper script.
 
 
 * Philly Scores API - API app written in Go. Returns formatted strings for major philly sports teams. 
