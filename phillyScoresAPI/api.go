@@ -1,6 +1,7 @@
 package main
 
 import (
+	"crypto/subtle"
 	"fmt"
 	"log"
 	"net/http"
@@ -8,13 +9,31 @@ import (
 )
 
 // Routes
-func handleRequests(p string) {
-	http.HandleFunc("/eagles", eagles)
-	http.HandleFunc("/flyers", flyers)
-	http.HandleFunc("/phillies", phillies)
-	http.HandleFunc("/psu", psu)
-	http.HandleFunc("/sixers", sixers)
+func handleRequests(p string, u string, pw string) {
+	realm := "Must provide a username and password"
+
+	http.HandleFunc("/eagles", basicAuth(eagles, u, pw, realm))
+	http.HandleFunc("/flyers", basicAuth(flyers, u, pw, realm))
+	http.HandleFunc("/phillies", basicAuth(phillies, u, pw, realm))
+	http.HandleFunc("/psu", basicAuth(psu, u, pw, realm))
+	http.HandleFunc("/sixers", basicAuth(sixers, u, pw, realm))
 	log.Fatal(http.ListenAndServe(p, nil))
+}
+
+func basicAuth(handler http.HandlerFunc, username, password, realm string) http.HandlerFunc {
+
+	return func(w http.ResponseWriter, r *http.Request) {
+		user, pass, ok := r.BasicAuth()
+
+		if !ok || subtle.ConstantTimeCompare([]byte(user), []byte(username)) != 1 || subtle.ConstantTimeCompare([]byte(pass), []byte(password)) != 1 {
+			w.Header().Set("WWW-Authenticate", `Basic realm="`+realm+`"`)
+			http.Error(w, "Unauthorized", http.StatusUnauthorized)
+			log.Println("Unauthorized hit:", r)
+			return
+		}
+
+		handler(w, r)
+	}
 }
 
 // Http Endpoints
