@@ -20,8 +20,8 @@ func handleRequests(p string, u string, pw string) {
 	log.Fatal(http.ListenAndServe(p, nil))
 }
 
+// Auth Middleware
 func basicAuth(handler http.HandlerFunc, username, password, realm string) http.HandlerFunc {
-
 	return func(w http.ResponseWriter, r *http.Request) {
 		user, pass, ok := r.BasicAuth()
 
@@ -31,7 +31,6 @@ func basicAuth(handler http.HandlerFunc, username, password, realm string) http.
 			log.Println("Unauthorized hit:", r)
 			return
 		}
-
 		handler(w, r)
 	}
 }
