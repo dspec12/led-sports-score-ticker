@@ -10,22 +10,21 @@ import (
 
 // Routes
 func handleRequests(p string, u string, pw string) {
-	realm := "Must provide a username and password"
-
-	http.HandleFunc("/eagles", basicAuth(eagles, u, pw, realm))
-	http.HandleFunc("/flyers", basicAuth(flyers, u, pw, realm))
-	http.HandleFunc("/phillies", basicAuth(phillies, u, pw, realm))
-	http.HandleFunc("/psu", basicAuth(psu, u, pw, realm))
-	http.HandleFunc("/sixers", basicAuth(sixers, u, pw, realm))
+	http.HandleFunc("/eagles", basicAuth(eagles, u, pw))
+	http.HandleFunc("/flyers", basicAuth(flyers, u, pw))
+	http.HandleFunc("/phillies", basicAuth(phillies, u, pw))
+	http.HandleFunc("/psu", basicAuth(psu, u, pw))
+	http.HandleFunc("/sixers", basicAuth(sixers, u, pw))
 	log.Fatal(http.ListenAndServe(p, nil))
 }
 
 // Auth Middleware
-func basicAuth(handler http.HandlerFunc, username, password, realm string) http.HandlerFunc {
+func basicAuth(handler http.HandlerFunc, username string, password string) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		user, pass, ok := r.BasicAuth()
 
 		if !ok || subtle.ConstantTimeCompare([]byte(user), []byte(username)) != 1 || subtle.ConstantTimeCompare([]byte(pass), []byte(password)) != 1 {
+			realm := "Must provide a username and password"
 			w.Header().Set("WWW-Authenticate", `Basic realm="`+realm+`"`)
 			http.Error(w, "Unauthorized", http.StatusUnauthorized)
 			log.Println("Unauthorized hit:", r)
