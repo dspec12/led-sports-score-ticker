@@ -4,6 +4,9 @@ import time
 import requests
 from rgbmatrix import RGBMatrix, RGBMatrixOptions, graphics
 
+# PhillyAPI Auth
+userid = os.environ.get("USERID")
+password = os.environ.get("PASSWORD")
 
 # Configuration for the matrix
 options = RGBMatrixOptions()
@@ -26,7 +29,7 @@ def grab_team_info(team):
     team_info = base_url + team
 
     try:
-        team_info = requests.get(team_info)
+        team_info = requests.get(team_info, auth=(userid, password))
         return team_info.text[:-1]
     
     except requests.exceptions.ConnectionError as e:
