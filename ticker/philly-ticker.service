@@ -7,6 +7,7 @@ StartLimitIntervalSec=5
 StartLimitBurst=10
 
 [Service]
+ExecStartPre=/bin/bash /home/pi/led-sports-score-ticker/ticker/repo-update.sh
 ExecStart=/usr/bin/python3 /home/pi/led-sports-score-ticker/ticker/philly_ticker.py
 Environment=PYTHONUNBUFFERED=1
 # Please set the PhillyAPI creds below
