@@ -11,4 +11,4 @@ Project consists of the tickers that run on a Raspi. These tickers consume text 
 
 <br></br>
 ### Demo:
-[![Demo](https://i9.ytimg.com/vi/Lv7JURRsOHY/mq2.jpg?sqp=COyXrv8F&rs=AOn4CLCsGIur0KjiWUuSvLwIqfxeAueSFA)](https://youtu.be/Lv7JURRsOHY "Demo")
+[![Demo](https://raw.githubusercontent.com/dspec12/led-sports-score-ticker/master/screen-ticker.png)](https://youtu.be/Lv7JURRsOHY "Demo")
