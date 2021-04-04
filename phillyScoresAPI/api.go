@@ -37,7 +37,7 @@ func basicAuth(handler http.HandlerFunc, username string, password string) http.
 // Http Handler Func
 func endpointFunc(w http.ResponseWriter, r *http.Request) {
 	targetTeam := strings.TrimPrefix(r.RequestURI, "/")
-	log.Println("Endpoint Hit:", targetTeam)
+	log.Printf("Request: %v [%v] %v --> %v", r.RemoteAddr, r.Method, r.UserAgent(), r.URL)
 	ts := getTeamData(targetTeam)
 	teamName := ts.Team.Name
 
